@@ -1,10 +1,10 @@
-﻿using Aspector.Interface;
+﻿using System.Collections.Generic;
 using Aspector.Attributes;
-using System.Collections.Generic;
-using Autofac.Extras.DynamicProxy2;
+using Aspector.Interface;
 using Aspector.Sample.OrderService.ConsoleClient.OrderServiceReference;
+using Autofac.Extras.DynamicProxy2;
 
-namespace Aspector.Sample.OrderService.ConsoleClient.Business
+namespace Aspector.Sample.OrderService.ConsoleClient
 {
     [Intercept(typeof(IAspectHandler))]
     public class OrderServiceManager : WcfClientBase.ServiceClientBase<OrderServiceClient>, IOrderServiceManager

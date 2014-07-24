@@ -4,7 +4,6 @@ using Ploeh.AutoFixture;
 using Aspector.Interface;
 using Autofac.Extras.DynamicProxy2;
 using Aspector.Serialization.ServiceStack;
-using Aspector.Sample.OrderService.ConsoleClient.Business;
 using Aspector.Sample.OrderService.ConsoleClient.OrderServiceReference;
 
 namespace Aspector.Sample.OrderService.ConsoleClient
@@ -29,9 +28,9 @@ namespace Aspector.Sample.OrderService.ConsoleClient
             IFixture fixture = new Fixture();
             IOrderServiceManager orderServiceManager = container.Resolve<IOrderServiceManager>();
 
-            Order orderToComplete = new Order();
+            Order orderToComplete = fixture.Build<Order>().Without(order => order.ExtensionData).Create();
             bool success = orderServiceManager.CompleteOrder(orderToComplete);
-            Console.WriteLine(success);
+            Console.WriteLine("Operation Result: {0}", success);
         }
     }
 }

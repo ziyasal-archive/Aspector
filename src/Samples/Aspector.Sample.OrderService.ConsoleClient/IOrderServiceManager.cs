@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Aspector.Sample.OrderService.ConsoleClient.OrderServiceReference;
 
-namespace Aspector.Sample.OrderService.ConsoleClient.Business
+namespace Aspector.Sample.OrderService.ConsoleClient
 {
     public interface IOrderServiceManager
     {
