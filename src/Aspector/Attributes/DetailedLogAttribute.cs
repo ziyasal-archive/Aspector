@@ -3,7 +3,7 @@
 namespace Aspector.Attributes
 {
     [AttributeUsage(AttributeTargets.Method)]
-    public class DetailedLogAttribute : Attribute
+    public class DetailedLogAttribute : BaseAspectAttribute, IWorksBefore, IWorksAfter
     {
     }
 }

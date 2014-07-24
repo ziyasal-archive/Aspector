@@ -3,7 +3,7 @@
 namespace Aspector.Attributes
 {
     [AttributeUsage(AttributeTargets.Method)]
-    public class WorksOnExceptionAttribute : Attribute
+    public class WorksOnExceptionAttribute : BaseAspectAttribute
     {
     }
 }

@@ -63,6 +63,8 @@
     <Compile Include="Attributes\BaseAspectAttribute.cs" />
     <Compile Include="Attributes\CacheAttribute.cs" />
     <Compile Include="Attributes\DetailedLogAttribute.cs" />
+    <Compile Include="Attributes\IWorksAfter.cs" />
+    <Compile Include="Attributes\IWorksBefore.cs" />
     <Compile Include="Attributes\WorksAfterAttribute.cs" />
     <Compile Include="Attributes\WorksBeforeAttribute.cs" />
     <Compile Include="Attributes\WorksOnExceptionAttribute.cs" />

@@ -3,7 +3,7 @@
 namespace Aspector.Attributes
 {
     [AttributeUsage(AttributeTargets.Method)]
-    public class WorksBeforeAttribute : Attribute
+    public class WorksBeforeAttribute : BaseAspectAttribute, IWorksBefore
     {
     }
 }
