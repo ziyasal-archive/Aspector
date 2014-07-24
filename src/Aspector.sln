@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspector", "Aspector\Aspect
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{56364A79-60FF-4917-9AED-402BB1A82C15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspector.Sample.OrderService", "Aspector.Sample.OrderService\Aspector.Sample.OrderService.csproj", "{9D12F7E1-18BE-4CAF-BDA0-E444BD85716A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspector.Sample.OrderService", "Samples\Aspector.Sample.OrderService\Aspector.Sample.OrderService.csproj", "{9D12F7E1-18BE-4CAF-BDA0-E444BD85716A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspector.Sample.OrderService.ConsoleClient", "Aspector.Sample.OrderService.ConsoleClient\Aspector.Sample.OrderService.ConsoleClient.csproj", "{B66C1EFB-37B1-4B85-83CC-DF67E9CE9208}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspector.Sample.OrderService.ConsoleClient", "Samples\Aspector.Sample.OrderService.ConsoleClient\Aspector.Sample.OrderService.ConsoleClient.csproj", "{B66C1EFB-37B1-4B85-83CC-DF67E9CE9208}"
 	ProjectSection(ProjectDependencies) = postProject
 		{9D12F7E1-18BE-4CAF-BDA0-E444BD85716A} = {9D12F7E1-18BE-4CAF-BDA0-E444BD85716A}
 	EndProjectSection
