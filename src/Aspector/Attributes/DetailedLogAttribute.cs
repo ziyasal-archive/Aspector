@@ -1,4 +1,5 @@
 ﻿using System;
+using Aspector.Helper;
 using Autofac;
 using Aspector.Interface;
 using Aspector.Processor;

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Castle.DynamicProxy;
 
-namespace Aspector.Processor
+namespace Aspector.Helper
 {
     public interface IInvocationHelper
     {

@@ -4,7 +4,7 @@ using System.Reflection;
 using Aspector.Interface;
 using Castle.DynamicProxy;
 
-namespace Aspector.Processor
+namespace Aspector.Helper
 {
     internal class InvocationHelper : IInvocationHelper
     {
