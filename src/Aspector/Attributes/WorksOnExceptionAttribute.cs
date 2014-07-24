@@ -1,4 +1,5 @@
 ﻿using System;
+using Autofac;
 using Aspector.Interface;
 using Castle.DynamicProxy;
 
@@ -7,11 +8,11 @@ namespace Aspector.Attributes
     [AttributeUsage(AttributeTargets.Method)]
     public class WorksOnExceptionAttribute : BaseAspectAttribute, IWorksOnError
     {
-        private readonly ILogger _logger;
+        private ILogger _logger;
 
-        public WorksOnExceptionAttribute(ILogger logger)
+        public override void InitializeDependencies()
         {
-            _logger = logger;
+            _logger = IoC.Resolve<ILogger>();
         }
 
         public virtual void Error(IInvocation invocation, Exception exception)

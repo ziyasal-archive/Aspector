@@ -2,7 +2,6 @@
 using Aspector.Helper;
 using Autofac;
 using Aspector.Interface;
-using Aspector.Processor;
 using Castle.DynamicProxy;
 using System.Collections.Generic;
 
@@ -11,11 +10,12 @@ namespace Aspector.Attributes
     [AttributeUsage(AttributeTargets.Method)]
     public class DetailedLogAttribute : BaseAspectAttribute, IWorksBefore, IWorksAfter
     {
-        private readonly ILogger _logger;
-        private readonly IInvocationHelper _invocationHelper;
-        private readonly ISerializer _serializer;
+        private ILogger _logger;
+        private IInvocationHelper _invocationHelper;
+        private ISerializer _serializer;
 
-        public DetailedLogAttribute()
+
+        public override void InitializeDependencies()
         {
             _logger = IoC.Resolve<ILogger>();
             _invocationHelper = IoC.Resolve<IInvocationHelper>();

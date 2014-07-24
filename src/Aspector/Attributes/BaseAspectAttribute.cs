@@ -12,6 +12,9 @@ namespace Aspector.Attributes
         public void SetContext(IComponentContext componentContext)
         {
             IoC = componentContext;
+            InitializeDependencies();
         }
+
+        public virtual void InitializeDependencies() { }
     }
 }
