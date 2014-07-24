@@ -1,6 +1,5 @@
 ﻿using System;
 using Autofac;
-using Aspector.Logging;
 using Ploeh.AutoFixture;
 using Aspector.Interface;
 using Autofac.Extras.DynamicProxy2;

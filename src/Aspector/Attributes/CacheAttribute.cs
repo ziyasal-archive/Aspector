@@ -1,4 +1,5 @@
 ﻿using System;
+using Castle.DynamicProxy;
 
 namespace Aspector.Attributes
 {
@@ -8,5 +9,15 @@ namespace Aspector.Attributes
         public bool AllowCache { get; set; }
         public string CacheKeyPattern { get; set; }
         public int CacheDuration { get; set; }
+
+        public virtual void Before(IInvocation invocation)
+        {
+
+        }
+
+        public virtual void After(IInvocation invocation)
+        {
+
+        }
     }
 }

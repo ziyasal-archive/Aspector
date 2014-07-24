@@ -1,7 +1,7 @@
 ﻿using System;
 using Aspector.Interface;
 
-namespace Aspector.Logging
+namespace Aspector.Sample.OrderService.ConsoleClient
 {
     public class ConsoleLogger : ILogger
     {

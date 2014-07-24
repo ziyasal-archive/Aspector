@@ -17,9 +17,6 @@ namespace Aspector.Handler
 
         public void Intercept(IInvocation invocation)
         {
-            var method = invocation.MethodInvocationTarget ?? invocation.Method;
-            _logger.Info(string.Format("BOF :{0}", method.Name));
-
             _processor.ProcessPreAspects(invocation);
 
             try
@@ -33,7 +30,6 @@ namespace Aspector.Handler
             }
 
             _processor.ProcessPostAspects(invocation);
-            _logger.Info(string.Format("EOF :{0}", method.Name));
         }
     }
 }
