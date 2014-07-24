@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Aspector.Sample.OrderService.OrderService" CodeBehind="OrderService.svc.cs" %>
