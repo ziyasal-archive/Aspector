@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Autofac;
 using Aspector.Interface;
 using Castle.DynamicProxy;
@@ -17,7 +18,8 @@ namespace Aspector.Attributes
 
         public virtual void Error(IInvocation invocation, Exception exception)
         {
-            _logger.Error(string.Format("An error occurred while executing {0}", invocation.Method.Name), exception);
+            MethodInfo methodInfo = invocation.MethodInvocationTarget ?? invocation.Method;
+            _logger.Error(string.Format("An error occurred while executing {0}", methodInfo.Name), exception);
         }
     }
 }

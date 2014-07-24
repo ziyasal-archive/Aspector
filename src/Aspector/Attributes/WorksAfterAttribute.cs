@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using Autofac;
 using Aspector.Interface;
 using Castle.DynamicProxy;
@@ -17,7 +18,8 @@ namespace Aspector.Attributes
 
         public virtual void After(IInvocation invocation)
         {
-            _logger.Info(string.Format("Method Executed :{0}", invocation.Method.Name));
+            MethodInfo methodInfo = invocation.MethodInvocationTarget ?? invocation.Method;
+            _logger.Info(string.Format("Method Executed :{0}", methodInfo.Name));
         }
     }
 }

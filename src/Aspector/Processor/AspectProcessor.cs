@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Autofac;
 using Aspector.Interface;
 using Castle.DynamicProxy;
@@ -17,52 +20,66 @@ namespace Aspector.Processor
 
         public void ProcessPreAspects(IInvocation invocation)
         {
-            Attribute[] attributes = Attribute.GetCustomAttributes(invocation.Method, typeof(IWorksBefore), true);
+            MethodInfo methodInfo = invocation.MethodInvocationTarget ?? invocation.Method;
+            Attribute[] attributes = Attribute.GetCustomAttributes(methodInfo, typeof(BaseAttribute), true);
+
             if (attributes.Length > default(int))
             {
                 foreach (Attribute attribute in attributes)
                 {
-                    var aspect = ((IWorksBefore)attribute);
-                    var baseAspectAttribute = aspect as BaseAttribute;
-                    if (baseAspectAttribute != null)
+                    var aspect = attribute as IWorksBefore;
+                    if (aspect != null)
                     {
-                        baseAspectAttribute.SetContext(_componentContext);
+                        var baseAspectAttribute = aspect as BaseAttribute;
+                        if (baseAspectAttribute != null)
+                        {
+                            baseAspectAttribute.SetContext(_componentContext);
+                        }
+                        aspect.Before(invocation);
                     }
-                    aspect.Before(invocation);
                 }
             }
         }
 
         public void ProcessPostAspects(IInvocation invocation)
         {
-            Attribute[] attributes = Attribute.GetCustomAttributes(invocation.Method, typeof(IWorksAfter), true);
+            MethodInfo methodInfo = invocation.MethodInvocationTarget ?? invocation.Method;
+            Attribute[] attributes = Attribute.GetCustomAttributes(methodInfo, typeof(BaseAttribute), true);
+
             if (attributes.Length > default(int))
             {
                 foreach (Attribute attribute in attributes)
                 {
-                    var aspect = ((IWorksAfter)attribute);
-                    var baseAspectAttribute = aspect as BaseAttribute;
-                    if (baseAspectAttribute != null)
+                    var aspect = attribute as IWorksAfter;
+                    if (aspect != null)
                     {
-                        baseAspectAttribute.SetContext(_componentContext);
+                        var baseAspectAttribute = aspect as BaseAttribute;
+                        if (baseAspectAttribute != null)
+                        {
+                            baseAspectAttribute.SetContext(_componentContext);
+                        }
+                        aspect.After(invocation);
                     }
-                    aspect.After(invocation);
                 }
             }
         }
 
         public void ProcessExceptionAspect(IInvocation invocation, Exception exception)
         {
-            Attribute[] attributes = Attribute.GetCustomAttributes(invocation.Method, typeof(IWorksOnError), true);
+            MethodInfo methodInfo = invocation.MethodInvocationTarget ?? invocation.Method;
+            Attribute[] attributes = Attribute.GetCustomAttributes(methodInfo, typeof(BaseAttribute), true);
             foreach (Attribute attribute in attributes)
             {
-                var aspect = ((IWorksOnError)attribute);
-                var baseAspectAttribute = aspect as BaseAttribute;
-                if (baseAspectAttribute != null)
+                var aspect = attribute as IWorksOnError;
+                if (aspect != null)
                 {
-                    baseAspectAttribute.SetContext(_componentContext);
+                    var baseAspectAttribute = aspect as BaseAttribute;
+                    if (baseAspectAttribute != null)
+                    {
+                        baseAspectAttribute.SetContext(_componentContext);
+                    }
+                    aspect.Error(invocation, exception);
                 }
-                aspect.Error(invocation, exception);
             }
         }
     }
