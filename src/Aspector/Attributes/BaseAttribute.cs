@@ -3,7 +3,7 @@ using Autofac;
 
 namespace Aspector.Attributes
 {
-    public class BaseAspectAttribute : Attribute
+    public class BaseAttribute : Attribute
     {
         public int Order { get; set; }
 

@@ -60,7 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AspectorModule.cs" />
-    <Compile Include="Attributes\BaseAspectAttribute.cs" />
+    <Compile Include="Attributes\BaseAttribute.cs" />
     <Compile Include="Attributes\CacheAttribute.cs" />
     <Compile Include="Attributes\DetailedLogAttribute.cs" />
     <Compile Include="Attributes\IWorksAfter.cs" />

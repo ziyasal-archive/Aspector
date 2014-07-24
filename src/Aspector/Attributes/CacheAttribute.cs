@@ -4,7 +4,7 @@ using Castle.DynamicProxy;
 namespace Aspector.Attributes
 {
     [AttributeUsage(AttributeTargets.Method)]
-    public class CacheAttribute : BaseAspectAttribute, IWorksBefore, IWorksAfter
+    public class CacheAttribute : BaseAttribute, IWorksBefore, IWorksAfter
     {
         public bool AllowCache { get; set; }
         public string CacheKeyPattern { get; set; }

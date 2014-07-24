@@ -1,6 +1,6 @@
 ﻿using System;
-using Aspector.Interface;
 using Autofac;
+using Aspector.Interface;
 using Castle.DynamicProxy;
 using Aspector.Attributes;
 
@@ -17,14 +17,13 @@ namespace Aspector.Processor
 
         public void ProcessPreAspects(IInvocation invocation)
         {
-            var methodInfo = invocation.MethodInvocationTarget ?? invocation.Method;
-            Attribute[] attributes = Attribute.GetCustomAttributes(methodInfo, typeof(IWorksBefore), true);
+            Attribute[] attributes = Attribute.GetCustomAttributes(invocation.Method, typeof(IWorksBefore), true);
             if (attributes.Length > default(int))
             {
                 foreach (Attribute attribute in attributes)
                 {
                     var aspect = ((IWorksBefore)attribute);
-                    var baseAspectAttribute = aspect as BaseAspectAttribute;
+                    var baseAspectAttribute = aspect as BaseAttribute;
                     if (baseAspectAttribute != null)
                     {
                         baseAspectAttribute.SetContext(_componentContext);
@@ -36,14 +35,13 @@ namespace Aspector.Processor
 
         public void ProcessPostAspects(IInvocation invocation)
         {
-            var methodInfo = invocation.MethodInvocationTarget ?? invocation.Method;
-            Attribute[] attributes = Attribute.GetCustomAttributes(methodInfo, typeof(IWorksAfter), true);
+            Attribute[] attributes = Attribute.GetCustomAttributes(invocation.Method, typeof(IWorksAfter), true);
             if (attributes.Length > default(int))
             {
                 foreach (Attribute attribute in attributes)
                 {
                     var aspect = ((IWorksAfter)attribute);
-                    var baseAspectAttribute = aspect as BaseAspectAttribute;
+                    var baseAspectAttribute = aspect as BaseAttribute;
                     if (baseAspectAttribute != null)
                     {
                         baseAspectAttribute.SetContext(_componentContext);
@@ -55,12 +53,11 @@ namespace Aspector.Processor
 
         public void ProcessExceptionAspect(IInvocation invocation, Exception exception)
         {
-            var methodInfo = invocation.MethodInvocationTarget ?? invocation.Method;
-            Attribute[] attributes = Attribute.GetCustomAttributes(methodInfo, typeof(IWorksOnError), true);
+            Attribute[] attributes = Attribute.GetCustomAttributes(invocation.Method, typeof(IWorksOnError), true);
             foreach (Attribute attribute in attributes)
             {
                 var aspect = ((IWorksOnError)attribute);
-                var baseAspectAttribute = aspect as BaseAspectAttribute;
+                var baseAspectAttribute = aspect as BaseAttribute;
                 if (baseAspectAttribute != null)
                 {
                     baseAspectAttribute.SetContext(_componentContext);

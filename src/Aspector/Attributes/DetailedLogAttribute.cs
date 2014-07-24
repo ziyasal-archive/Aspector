@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace Aspector.Attributes
 {
     [AttributeUsage(AttributeTargets.Method)]
-    public class DetailedLogAttribute : BaseAspectAttribute, IWorksBefore, IWorksAfter
+    public class DetailedLogAttribute : BaseAttribute, IWorksBefore, IWorksAfter
     {
         private ILogger _logger;
         private IInvocationHelper _invocationHelper;
@@ -35,8 +35,7 @@ namespace Aspector.Attributes
 
         public virtual void After(IInvocation invocation)
         {
-            var methodInfo = invocation.MethodInvocationTarget ?? invocation.Method;
-            _logger.Info(string.Format("Method : {0}, Return Value : {1}", methodInfo.Name, _serializer.Serialize(invocation.ReturnValue)));
+            _logger.Info(string.Format("Method : {0}, Return Value : {1}", invocation.Method.Name, _serializer.Serialize(invocation.ReturnValue)));
         }
     }
 }
