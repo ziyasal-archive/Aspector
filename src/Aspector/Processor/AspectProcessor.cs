@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Reflection;
 using Aspector.Interface;
 using Castle.DynamicProxy;
 using Aspector.Attributes;
@@ -10,31 +8,16 @@ namespace Aspector.Processor
 {
     public class AspectProcessor : IAspectProcessor
     {
-        private readonly ISerializer _serializer;
         private readonly ILogger _logger;
+        private readonly IInvocationHelper _invocationHelper;
 
-        public AspectProcessor(ISerializer serializer, ILogger logger)
+        public AspectProcessor(ILogger logger, IInvocationHelper invocationHelper)
         {
-            _serializer = serializer;
             _logger = logger;
+            _invocationHelper = invocationHelper;
         }
 
-        private void ProcessCacheAspect(IInvocation invocation)
-        {
-            //TODO:
-        }
-
-        private void ProcessDetailedLogAspect(IInvocation invocation)
-        {
-            Dictionary<string, string> parameters = GetParameters(invocation);
-
-            foreach (var parameter in parameters)
-            {
-                _logger.Info(string.Format("Name :{0}, Value:{1}", parameter.Key, parameter.Value));
-            }
-        }
-
-        public void ProcessAspects(IInvocation invocation)
+        public void ProcessPreAspects(IInvocation invocation)
         {
             var methodInfo = invocation.MethodInvocationTarget ?? invocation.Method;
             if (Attribute.GetCustomAttribute(methodInfo, typeof(DetailedLogAttribute), true) != null)
@@ -47,22 +30,34 @@ namespace Aspector.Processor
             }
         }
 
-        public Dictionary<string, string> GetParameters(IInvocation invocation)
+        public void ProcessPostAspects(IInvocation invocation)
         {
-            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            //TODO:
+        }
 
-            MethodInfo method = invocation.Method;
-
-            if (method != null && method.GetParameters().Any())
+        public void ProcessExceptionAspect(IInvocation invocation, Exception exception)
+        {
+            var methodInfo = invocation.MethodInvocationTarget ?? invocation.Method;
+            Attribute attribute = Attribute.GetCustomAttribute(methodInfo, typeof(WorksOnExceptionAttribute), true);
+            if (attribute != null)
             {
-                for (int index = 0; index < method.GetParameters().Length; index++)
-                {
-                    ParameterInfo parameter = method.GetParameters()[index];
-                    parameters[parameter.Name] = _serializer.Serialize(invocation.Arguments[index]);
-                }
+                _logger.Error(string.Format("An error occurred while executing {0}", methodInfo.Name), exception);
             }
+        }
 
-            return parameters;
+        private void ProcessDetailedLogAspect(IInvocation invocation)
+        {
+            Dictionary<string, string> parameters = _invocationHelper.GetParameters(invocation);
+
+            foreach (var parameter in parameters)
+            {
+                _logger.Info(string.Format("Name :{0}, Value:{1}", parameter.Key, parameter.Value));
+            }
+        }
+
+        private void ProcessCacheAspect(IInvocation invocation)
+        {
+            //TODO:
         }
     }
 }

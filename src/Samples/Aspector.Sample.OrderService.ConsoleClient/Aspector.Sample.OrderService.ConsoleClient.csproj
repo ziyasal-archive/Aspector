@@ -115,11 +115,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Aspector.Serialization.ServiceStack\Aspector.Serialization.ServiceStack.csproj">
+    <ProjectReference Include="..\..\Aspector.Serialization.ServiceStack\Aspector.Serialization.ServiceStack.csproj">
       <Project>{6937A40C-9A65-4E52-B25A-5E9932288C6A}</Project>
       <Name>Aspector.Serialization.ServiceStack</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Aspector\Aspector.csproj">
+    <ProjectReference Include="..\..\Aspector\Aspector.csproj">
       <Project>{47F70E27-0AC6-4DB3-A617-C4EB1FAF6361}</Project>
       <Name>Aspector</Name>
     </ProjectReference>

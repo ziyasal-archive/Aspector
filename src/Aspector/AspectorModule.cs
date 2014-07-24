@@ -11,6 +11,8 @@ namespace Aspector
         {
             builder.RegisterType<AspectHandler>().As<IAspectHandler>().SingleInstance();
             builder.RegisterType<AspectProcessor>().As<IAspectProcessor>().SingleInstance();
+            builder.RegisterType<InvocationHelper>().As<IInvocationHelper>().SingleInstance();
+
             base.Load(builder);
         }
     }

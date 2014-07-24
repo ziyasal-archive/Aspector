@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AspectorModule.cs" />
+    <Compile Include="Attributes\BaseAspectAttribute.cs" />
     <Compile Include="Attributes\CacheAttribute.cs" />
     <Compile Include="Attributes\DetailedLogAttribute.cs" />
     <Compile Include="Attributes\WorksAfterAttribute.cs" />
@@ -72,6 +73,8 @@
     <Compile Include="Interface\ISerializer.cs" />
     <Compile Include="Logging\ConsoleLogger.cs" />
     <Compile Include="Processor\AspectProcessor.cs" />
+    <Compile Include="Processor\IInvocationHelper.cs" />
+    <Compile Include="Processor\InvocationHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serialization\DefaultSerializer.cs" />
   </ItemGroup>

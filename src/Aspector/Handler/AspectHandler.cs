@@ -17,9 +17,10 @@ namespace Aspector.Handler
 
         public void Intercept(IInvocation invocation)
         {
-            _logger.Info(string.Format("BOF :{0}", invocation.Method.Name));
+            var method = invocation.MethodInvocationTarget ?? invocation.Method;
+            _logger.Info(string.Format("BOF :{0}", method.Name));
 
-            _processor.ProcessAspects(invocation);
+            _processor.ProcessPreAspects(invocation);
 
             try
             {
@@ -27,10 +28,12 @@ namespace Aspector.Handler
             }
             catch (Exception exception)
             {
+                _processor.ProcessExceptionAspect(invocation,exception);
                 _logger.Error("An error occured.", exception);
             }
 
-            _logger.Info(string.Format("EOF :{0}", invocation.Method.Name));
+            _processor.ProcessPostAspects(invocation);
+            _logger.Info(string.Format("EOF :{0}", method.Name));
         }
     }
 }
