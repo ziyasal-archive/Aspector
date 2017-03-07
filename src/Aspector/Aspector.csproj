@@ -59,19 +59,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AspectHandler.cs" />
     <Compile Include="AspectorModule.cs" />
     <Compile Include="Attributes\BaseAttribute.cs" />
     <Compile Include="Attributes\CacheAttribute.cs" />
     <Compile Include="Attributes\DetailedLogAttribute.cs" />
-    <Compile Include="Attributes\IWorksAfter.cs" />
-    <Compile Include="Attributes\IWorksBefore.cs" />
-    <Compile Include="Attributes\IWorksOnError.cs" />
-    <Compile Include="Attributes\WorksAfterAttribute.cs" />
-    <Compile Include="Attributes\WorksBeforeAttribute.cs" />
-    <Compile Include="Attributes\WorksOnExceptionAttribute.cs" />
+    <Compile Include="Attributes\IWorkAfter.cs" />
+    <Compile Include="Attributes\IWorkBefore.cs" />
+    <Compile Include="Attributes\IWorkOnError.cs" />
+    <Compile Include="Attributes\WorkAfterAttribute.cs" />
+    <Compile Include="Attributes\WorkBeforeAttribute.cs" />
+    <Compile Include="Attributes\WorkOnExceptionAttribute.cs" />
     <Compile Include="Helper\IInvocationHelper.cs" />
     <Compile Include="Helper\InvocationHelper.cs" />
-    <Compile Include="Handler\AspectHandler.cs" />
     <Compile Include="Interface\IAspectProcessor.cs" />
     <Compile Include="Interface\IAspectHandler.cs" />
     <Compile Include="Interface\ILogger.cs" />
@@ -85,7 +85,6 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using Autofac;
 using Aspector.Interface;
@@ -11,11 +9,11 @@ namespace Aspector.Processor
 {
     public class AspectProcessor : IAspectProcessor
     {
-        private readonly IComponentContext _componentContext;
+        private readonly ILifetimeScope _lifetimeScope;
 
-        public AspectProcessor(IComponentContext componentContext)
+        public AspectProcessor(ILifetimeScope lifetimeScope)
         {
-            _componentContext = componentContext;
+            _lifetimeScope = lifetimeScope;
         }
 
         public void ProcessPreAspects(IInvocation invocation)
@@ -27,14 +25,11 @@ namespace Aspector.Processor
             {
                 foreach (Attribute attribute in attributes)
                 {
-                    var aspect = attribute as IWorksBefore;
+                    var aspect = attribute as IWorkBefore;
                     if (aspect != null)
                     {
                         var baseAspectAttribute = aspect as BaseAttribute;
-                        if (baseAspectAttribute != null)
-                        {
-                            baseAspectAttribute.SetContext(_componentContext);
-                        }
+                        baseAspectAttribute?.SetContext(_lifetimeScope);
                         aspect.Before(invocation);
                     }
                 }
@@ -50,14 +45,11 @@ namespace Aspector.Processor
             {
                 foreach (Attribute attribute in attributes)
                 {
-                    var aspect = attribute as IWorksAfter;
+                    var aspect = attribute as IWorkAfter;
                     if (aspect != null)
                     {
                         var baseAspectAttribute = aspect as BaseAttribute;
-                        if (baseAspectAttribute != null)
-                        {
-                            baseAspectAttribute.SetContext(_componentContext);
-                        }
+                        baseAspectAttribute?.SetContext(_lifetimeScope);
                         aspect.After(invocation);
                     }
                 }
@@ -70,14 +62,11 @@ namespace Aspector.Processor
             Attribute[] attributes = Attribute.GetCustomAttributes(methodInfo, typeof(BaseAttribute), true);
             foreach (Attribute attribute in attributes)
             {
-                var aspect = attribute as IWorksOnError;
+                var aspect = attribute as IWorkOnError;
                 if (aspect != null)
                 {
                     var baseAspectAttribute = aspect as BaseAttribute;
-                    if (baseAspectAttribute != null)
-                    {
-                        baseAspectAttribute.SetContext(_componentContext);
-                    }
+                    baseAspectAttribute?.SetContext(_lifetimeScope);
                     aspect.Error(invocation, exception);
                 }
             }

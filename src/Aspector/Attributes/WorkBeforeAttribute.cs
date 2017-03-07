@@ -7,7 +7,7 @@ using Castle.DynamicProxy;
 namespace Aspector.Attributes
 {
     [AttributeUsage(AttributeTargets.Method)]
-    public class WorksOnExceptionAttribute : BaseAttribute, IWorksOnError
+    public class WorkBeforeAttribute : BaseAttribute, IWorkBefore
     {
         private ILogger _logger;
 
@@ -16,10 +16,10 @@ namespace Aspector.Attributes
             _logger = IoC.Resolve<ILogger>();
         }
 
-        public virtual void Error(IInvocation invocation, Exception exception)
+        public virtual void Before(IInvocation invocation)
         {
             MethodInfo methodInfo = invocation.MethodInvocationTarget ?? invocation.Method;
-            _logger.Error(string.Format("An error occurred while executing {0}", methodInfo.Name), exception);
+            _logger.Info($"Method Executing :{methodInfo.Name}");
         }
     }
 }

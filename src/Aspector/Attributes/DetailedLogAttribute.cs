@@ -9,7 +9,7 @@ using System.Collections.Generic;
 namespace Aspector.Attributes
 {
     [AttributeUsage(AttributeTargets.Method)]
-    public class DetailedLogAttribute : BaseAttribute, IWorksBefore, IWorksAfter
+    public class DetailedLogAttribute : BaseAttribute, IWorkBefore, IWorkAfter
     {
         private ILogger _logger;
         private IInvocationHelper _invocationHelper;
@@ -29,7 +29,7 @@ namespace Aspector.Attributes
 
             foreach (var parameter in parameters)
             {
-                _logger.Info(string.Format("Name :{0}, Value:{1}", parameter.Key, parameter.Value));
+                _logger.Info($"Name :{parameter.Key}, Value:{parameter.Value}");
             }
 
         }
@@ -37,7 +37,7 @@ namespace Aspector.Attributes
         public virtual void After(IInvocation invocation)
         {
             MethodInfo methodInfo = invocation.MethodInvocationTarget ?? invocation.Method;
-            _logger.Info(string.Format("Method : {0}, Return Value : {1}", methodInfo.Name, _serializer.Serialize(invocation.ReturnValue)));
+            _logger.Info($"Method : {methodInfo.Name}, Return Value : {_serializer.Serialize(invocation.ReturnValue)}");
         }
     }
 }

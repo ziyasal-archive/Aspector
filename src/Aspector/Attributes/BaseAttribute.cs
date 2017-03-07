@@ -7,11 +7,11 @@ namespace Aspector.Attributes
     {
         public int Order { get; set; }
 
-        protected IComponentContext IoC;
+        protected ILifetimeScope IoC;
 
-        public void SetContext(IComponentContext componentContext)
+        public void SetContext(ILifetimeScope lifetimeScope)
         {
-            IoC = componentContext;
+            IoC = lifetimeScope;
             InitializeDependencies();
         }
 

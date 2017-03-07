@@ -2,7 +2,7 @@
 
 namespace Aspector.Attributes
 {
-    public interface IWorksBefore
+    public interface IWorkBefore
     {
         void Before(IInvocation invocation);
     }

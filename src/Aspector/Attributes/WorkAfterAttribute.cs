@@ -7,7 +7,7 @@ using Castle.DynamicProxy;
 namespace Aspector.Attributes
 {
     [AttributeUsage(AttributeTargets.Method)]
-    public class WorksBeforeAttribute : BaseAttribute, IWorksBefore
+    public class WorkAfterAttribute : BaseAttribute, IWorkAfter
     {
         private ILogger _logger;
 
@@ -16,10 +16,10 @@ namespace Aspector.Attributes
             _logger = IoC.Resolve<ILogger>();
         }
 
-        public virtual void Before(IInvocation invocation)
+        public virtual void After(IInvocation invocation)
         {
             MethodInfo methodInfo = invocation.MethodInvocationTarget ?? invocation.Method;
-            _logger.Info(string.Format("Method Executing :{0}", methodInfo.Name));
+            _logger.Info($"Method Executed :{methodInfo.Name}");
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Aspector.Attributes
 {
-    public interface IWorksAfter
+    public interface IWorkAfter
     {
         void After(IInvocation invocation);
     }

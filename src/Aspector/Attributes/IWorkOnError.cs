@@ -3,7 +3,7 @@ using Castle.DynamicProxy;
 
 namespace Aspector.Attributes
 {
-    interface IWorksOnError
+    interface IWorkOnError
     {
         void Error(IInvocation invocation, Exception exception);
     }

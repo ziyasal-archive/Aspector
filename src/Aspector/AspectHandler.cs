@@ -2,7 +2,7 @@
 using Aspector.Interface;
 using Castle.DynamicProxy;
 
-namespace Aspector.Handler
+namespace Aspector
 {
     public class AspectHandler : IAspectHandler, IInterceptor
     {
